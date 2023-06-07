@@ -1,14 +1,16 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../Providers/AuthProvider";
-import { saveUser } from "../../api/auth";
-// import { useNavigate } from "react-router-dom";
+import SocialSignIn from "../../components/Shared/SocialSignIn/SocialSignIn";
+import { Link, useNavigate } from "react-router-dom";
+
+
 
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, updateUserProfile } = useContext(AuthContext);
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
 
     const onSubmit = data => {
@@ -19,6 +21,21 @@ const Register = () => {
                 console.log(signedUser);
                 updateUserProfile(data.name, data.photo)
                     .then(() => {
+                        const savedUser = { name: data.name, email: data.email };
+                        fetch("http://localhost:5000/users", {
+                            method: "POST",
+                            headers: {
+                                "content-type": "application/json"
+                            },
+                            body: JSON.stringify(savedUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+                                    alert("Successfully Register")
+                                    navigate("/login")
+                                }
+                            })
 
                     })
                     .catch(error => console.log(error))
@@ -31,7 +48,6 @@ const Register = () => {
 
     return (
         <div className="hero min-h-screen bg-base-200">
-
 
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mt-24">
                 <h2 className="text-3xl text-center mt-5 font-semibold">Register Now</h2>
@@ -74,11 +90,12 @@ const Register = () => {
                         {errors.photo && <span className="text-red-400 text-sm">Photo url is required</span>}
                     </div>
                     <div className="form-control mt-6">
-                        <input className="btn btn-primary" type="submit" value="Login" />
+                        <input className="btn btn-primary" type="submit" value="Register" />
                     </div>
                 </form>
                 <div className="form-control mt-2 mb-5 mx-6">
-                    <button className="btn btn-success">Sign up with Google</button>
+                    <SocialSignIn />
+                    <Link to="/login" className="mt-4 text-green-600">Have an account? Please Login</Link>
                 </div>
             </div>
 

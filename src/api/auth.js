@@ -1,14 +1,12 @@
 // save user in db
 export const saveUser = user => {
-    const currentUser = {
-        email: user.email
-    }
-    fetch(`http://localhost:5000/users/${user?.email}`, {
-        method: "PUT",
+   
+    fetch(`http://localhost:5000/users`, {
+        method: "POST",
         headers: {
             "content-type": "application/json"
         },
-        body: JSON.stringify(currentUser)
+        body: JSON.stringify(user)
     })
     .then(res => res.json())
     .then(data => {
