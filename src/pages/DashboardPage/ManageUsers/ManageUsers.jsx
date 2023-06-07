@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query"
-import { useState } from "react";
 
 const ManageUsers = () => {
 
@@ -15,6 +14,7 @@ const ManageUsers = () => {
         .then(res => res.json())
         .then(data => {
             if(data.modifiedCount> 0){
+                refetch()
                 alert("user now admin")
             }
         })
@@ -27,6 +27,7 @@ const ManageUsers = () => {
         .then(res => res.json())
         .then(data => {
             if(data.modifiedCount> 0){
+                refetch()
                 alert("user now Instructor")
             }
         })
