@@ -35,7 +35,10 @@ const Dashboard = () => {
                                 </li>
                             </>
                     }
-
+                    <hr />
+                    <li className="mt-20">
+                        <Link to="/">Home</Link>
+                    </li>
                 </ul>
             </div>
         </div>
