@@ -2,6 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 
 
 const Dashboard = () => {
+    const isAdmin = true;
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -16,20 +17,25 @@ const Dashboard = () => {
                 <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
                     {/* Sidebar content here */}
 
-                    <li>
-                        <Link to="/dashboard/manage-users">Manage Users</Link>
-                    </li>
-                    <li>
-                        <Link to="/dashboard/manage-classes">Manage Classes</Link>
-                    </li>
+                    {
+                        isAdmin ?
+                            <><li>
+                                <Link to="/dashboard/manage-users">Manage Users</Link>
+                            </li>
+                                <li>
+                                    <Link to="/dashboard/manage-classes">Manage Classes</Link>
+                                </li>
+                            </> :
+                            <>
+                                <li>
+                                    <Link to="/dashboard/add-class">Add A Class</Link>
+                                </li>
+                                <li>
+                                    <Link to="/dashboard/my-classes">My Class</Link>
+                                </li>
+                            </>
+                    }
 
-
-                    <li>
-                        <Link to="/dashboard/add-class">Add A Class</Link>
-                    </li>
-                    <li>
-                        <Link to="/dashboard/my-classes">My Class</Link>
-                    </li>
                 </ul>
             </div>
         </div>
