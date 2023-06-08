@@ -1,9 +1,30 @@
+import { useContext, useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import { AuthContext } from "../Providers/AuthProvider";
 
 
 const Dashboard = () => {
-    const isAdmin = false;
-    const isInstructor = true;
+    const {user} = useContext(AuthContext);
+    const [loading, setLoading] = useState(false);
+    const [userRole, setUserRole]= useState();
+    useEffect(()=> {
+        setLoading(true)
+        fetch("http://localhost:5000/users")
+        .then(res => res.json())
+        .then(data => {
+          const studentRole = data.find(student => student?.email === user?.email );
+          setUserRole(studentRole)
+          setLoading(false)
+        })
+    }, [user?.email]);
+
+    // const isAdmin = false;
+    // const isInstructor = true;
+    if(loading){
+        return "Loading ............................"
+    }
+
+
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -19,7 +40,7 @@ const Dashboard = () => {
                     {/* Sidebar content here */}
 
                     {
-                        isAdmin ?
+                        userRole?.role == "admin" ?
                             <><li>
                                 <Link to="/dashboard/manage-users">Manage Users</Link>
                             </li>
@@ -29,7 +50,7 @@ const Dashboard = () => {
                             </> :
                             <>
                                 {
-                                    isInstructor ?
+                                    userRole?.role == "instructor" ?
                                         <>
                                             <li>
                                                 <Link to="/dashboard/add-class">Add A Class</Link>
