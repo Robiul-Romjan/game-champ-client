@@ -8,6 +8,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 const ClassesPage = () => {
     const {user} = useContext(AuthContext)
     const [allClasses, setAllClasses] = useState([]);
+    const [userRole, setUserRole]= useState();
+    const [loading, setLoading]= useState(false);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -20,6 +22,21 @@ const ClassesPage = () => {
                 setAllClasses(approvedClasses);
             })
     }, []);
+
+    useEffect(()=> {
+        setLoading(true)
+        fetch("http://localhost:5000/users")
+        .then(res => res.json())
+        .then(data => {
+          const studentRole = data.find(student => student?.email === user?.email );
+          setUserRole(studentRole)
+          setLoading(false)
+        })
+    }, [user?.email]);
+
+    if(loading){
+        return "Loading"
+    }
 
     const handleSelect =(item)=> {
         if (user && user.email) {
@@ -56,20 +73,20 @@ const ClassesPage = () => {
     }
 
     return (
-        <div className="mt-20">
+        <div className="mt-20 max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4">
             <h2 className="text-3xl text-center">All Classes {allClasses.length}</h2>
             <div className="grid md:grid-cols-3 gap-6">
                 {
                     allClasses &&
-                    allClasses.map(cls=> <div key={cls._id} className="card w-96 glass">
+                    allClasses.map(cls=> <div key={cls._id} className={`card w-96 glass ${cls?.seats == 0 ? "bg-red-500 text-white": ""}`}>
                     <figure><img src={cls.image} alt="car!"/></figure>
                     <div className="card-body">
                       <p className="text-lg">Class: {cls.class_name}</p>
                       <p>Instructor: {cls.instructor_name} </p>
-                      <p>Available Seats: 10 </p>
+                      <p>Available Seats: {cls.seats} </p>
                       <p>Price: {cls.price} </p>
                       <div className="card-actions">
-                        <button onClick={()=> handleSelect(cls)} className="btn btn-primary">Select</button>
+                        <button onClick={()=> handleSelect(cls)} className="btn btn-primary" disabled={ userRole?.role !== undefined || cls?.seats === 0}>Select</button>
                       </div>
                     </div>
                   </div>)
