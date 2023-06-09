@@ -1,5 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import { FaTrashAlt, FaStripe } from "react-icons/fa";
+import Swal from "sweetalert2";
 
 
 const MySelectedClasses = () => {
@@ -13,6 +15,37 @@ const MySelectedClasses = () => {
             .then(res => res.json())
             .then(data => setClasses(data))
     }, [url]);
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                fetch(`http://localhost:5000/select-classes/${id}`, {
+                    method: "DELETE"
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+                            const remaining = classes.filter(item => item._id !== id);
+                            setClasses(remaining);
+                            Swal.fire(
+                                'Deleted!',
+                                'Your select class deleted.',
+                                'Ok'
+                            )
+                        }
+                    })
+            }
+        })
+    };
 
     return (
         <div className="w-full mt-12">
@@ -36,7 +69,7 @@ const MySelectedClasses = () => {
                         <tbody>
                             {
                                 classes.map((item, i) => <tr key={item._id}>
-                                    <td className="font-semibold">{i+1}</td>
+                                    <td className="font-semibold">{i + 1}</td>
                                     <td>
                                         <div className="flex items-center space-x-3">
                                             <div className="avatar">
@@ -50,10 +83,10 @@ const MySelectedClasses = () => {
                                     <td>{item.instructor}</td>
                                     <td>$ {item.price}</td>
                                     <td>
-                                        <button className="btn btn-ghost btn-xs">Delete</button>
+                                        <button onClick={() => handleDelete(item._id)} className="btn btn-circle btn-error text-white font-semibold btn-sm"><FaTrashAlt /></button>
                                     </td>
                                     <td>
-                                        <button className="btn btn-ghost btn-xs">Pay</button>
+                                        <button className="btn btn-success text-white btn-sm"><FaStripe className="text-3xl" /></button>
                                     </td>
                                 </tr>)
                             }
