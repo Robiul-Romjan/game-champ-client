@@ -1,9 +1,15 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useEffect, useState } from "react";
+import FeedbackModal from "../../../components/FeedbackModal/FeedbackModal";
 
 const ManageClasses = () => {
     const [allClasses, setAllClasses] = useState([]);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const closeModal = () => {
+        setIsOpen(false)
+    };
 
     useEffect(() => {
         axios.get("http://localhost:5000/classes")
@@ -30,6 +36,10 @@ const ManageClasses = () => {
             })
     };
 
+    const handleFeedback =(id)=> {
+         
+    }
+
     return (
         <div className="w-full">
             <h2 className="text-3xl">Manage classes by Admin</h2>
@@ -47,7 +57,9 @@ const ManageClasses = () => {
                             <div className="flex justify-between">
                                 <button onClick={() => handleApprove(item._id)} className="btn btn-sm btn-secondary" disabled={item.status == "approved" || item.status == "denied"}>Approve</button>
                                 <button onClick={() => handleDeny(item._id)} className="btn btn-sm btn-error" disabled={item.status == "approved" || item.status == "denied"}>Deny</button>
-                                <button className="btn btn-sm btn-secondary">Feedback</button>
+
+                                <button onClick={()=> handleFeedback(item._id)} className="btn btn-sm btn-secondary">Feedback</button>
+                                
                             </div>
                         </div>
                     </div>)

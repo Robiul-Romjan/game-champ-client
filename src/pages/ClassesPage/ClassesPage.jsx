@@ -53,7 +53,6 @@ const ClassesPage = () => {
                 .then(data => {
                     if(data.insertedId){
                        toast("successfully select the class");
-                       navigate("/dashboard/my-selected-classes")
                     }
                 })
         }else{

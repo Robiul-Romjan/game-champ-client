@@ -19,6 +19,9 @@ const NavBar = () => {
             <NavLink className="ms-5" to="/">Home</NavLink>
             <NavLink className="ms-5" to="/instructors">Instructors</NavLink>
             <NavLink className="ms-5" to="/classes">Classes</NavLink>
+            {
+                user ? <NavLink className="ms-5" to="/dashboard">Dashboard</NavLink> : ""
+            }
         </div>
     </>;
 
@@ -47,16 +50,15 @@ const NavBar = () => {
                 <div className="navbar-end">
                     {
                         user ? <>
-                        <NavLink className="me-5" to="/dashboard">Dashboard</NavLink>
                             <div className="avatar">
                                 <div className="w-12 mr-5 rounded-full">
                                     <img src={user?.photoURL} />
                                 </div>
                             </div>
-                            <button onClick={handleLogout} className="btn btn-secondary">Log Out</button>
+                            <button onClick={handleLogout} className="btn btn-error btn-sm">Log Out</button>
                         </> :
                             <>
-                                <NavLink className="ms-5" to="/login">LOG IN</NavLink>
+                                <NavLink className="ms-5 btn btn-success btn-sm" to="/login">LOG IN</NavLink>
                             </>
                     }
                 </div>
