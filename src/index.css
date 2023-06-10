@@ -17,9 +17,18 @@ h1,h2,h3,h4, h5, p,span, a{
     border: none;
     text-decoration: none;
 }
-.btn-all:hover{
+.btn-all, .btn-all-sm:hover{
     background: #3d03f9;
     color: #fff;
+}
+
+.btn-all-sm{
+    background: #3c12c6;
+    border-radius: 20px;
+    padding: 5px 20px;
+    color: #fff;
+    border: none;
+    text-decoration: none;
 }
 
 .bg-color{

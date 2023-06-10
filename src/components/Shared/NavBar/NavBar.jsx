@@ -7,22 +7,19 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 const NavBar = () => {
 
     const { user, logOut } = useContext(AuthContext);
-    // const [cart] = useCart();
-    // console.log(user)
 
     const handleLogout = () => {
         logOut();
     }
 
     const navOptions = <>
-        <div className="flex items-center">
-            <NavLink className="ms-5" to="/">Home</NavLink>
-            <NavLink className="ms-5" to="/instructors">Instructors</NavLink>
-            <NavLink className="ms-5" to="/classes">Classes</NavLink>
+       
+            <NavLink className="ms-5 nav-link" to="/">Home</NavLink>
+            <NavLink className="ms-5 nav-link" to="/instructors">Instructors</NavLink>
+            <NavLink className="ms-5 nav-link" to="/classes">Classes</NavLink>
             {
-                user ? <NavLink className="ms-5" to="/dashboard">Dashboard</NavLink> : ""
+                user ? <NavLink className="ms-5 nav-link" to="/dashboard">Dashboard</NavLink> : ""
             }
-        </div>
     </>;
 
     return (
@@ -33,12 +30,12 @@ const NavBar = () => {
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
-                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box text-black w-52">
                             {navOptions}
                         </ul>
                     </div>
                     <Link className="btn btn-ghost normal-case text-xl">
-                        <img className="w-12" src={logo} alt="" />
+                        <img className="w-12 hidden md:block" src={logo} alt="" />
                         <span>GameChamp</span>
                     </Link>
                 </div>
@@ -52,13 +49,13 @@ const NavBar = () => {
                         user ? <>
                             <div className="avatar">
                                 <div className="w-12 mr-5 rounded-full">
-                                    <img src={user?.photoURL} />
+                                    <img className="hidden md:block" src={user?.photoURL} />
                                 </div>
                             </div>
-                            <button onClick={handleLogout} className="btn btn-error btn-sm">Log Out</button>
+                            <button onClick={handleLogout} className="btn-all-sm">Log Out</button>
                         </> :
                             <>
-                                <NavLink className="ms-5 btn btn-success btn-sm" to="/login">LOG IN</NavLink>
+                                <NavLink className="btn-all-sm" to="/login">LogIn</NavLink>
                             </>
                     }
                 </div>
