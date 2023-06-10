@@ -13,6 +13,7 @@ const SocialSignIn = () => {
         signInWithGoogle()
             .then(result => {
                 const savedUser = { name: result.user.displayName, email: result.user.email, image: result.user.photoURL }
+                
                 fetch("http://localhost:5000/users", {
                     method: "POST",
                     headers: {
@@ -21,11 +22,9 @@ const SocialSignIn = () => {
                     body: JSON.stringify(savedUser)
                 })
                     .then(res => res.json())
+                    // eslint-disable-next-line no-unused-vars
                     .then(data => {
-                        if (data.insertedId) {
-                            alert("Successfully Register")
-                            navigate(from, { replace: true }) || "/"
-                        }
+                        navigate(from, { replace: true }) || "/"
                     })
             })
             .catch(error => console.log(error.message))
