@@ -16,7 +16,12 @@ const MyClasses = () => {
     }, [url])
     return (
         <div className="w-full mt-12">
-            <h2 className="text-3xl text-center"> My Classes {classes.length}</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-center">My Added Classes</h2>
+            <div className="flex items-center justify-center gap-2">
+                <div className="h-1 w-36 bg-[#4021a5]"></div>
+                <span className="text-red-500 font-semibold">My Classes</span>
+                <div className="h-1 w-36 bg-[#4021a5]"></div>
+            </div>
             <div className="ms-12 mt-12">
                 <div className="overflow-x-auto">
                     <table className="table">

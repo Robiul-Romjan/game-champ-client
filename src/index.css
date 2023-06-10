@@ -17,7 +17,12 @@ h1,h2,h3,h4, h5, p,span, a{
     border: none;
     text-decoration: none;
 }
-.btn-all, .btn-all-sm:hover{
+.btn-all:hover{
+    background: #3d03f9;
+    color: #fff;
+}
+
+.btn-all-sm:hover{
     background: #3d03f9;
     color: #fff;
 }
@@ -36,5 +41,5 @@ h1,h2,h3,h4, h5, p,span, a{
 }
 
 .nav-link.active{
-    color: #3d03f9;
+    color: #da7909;
 }

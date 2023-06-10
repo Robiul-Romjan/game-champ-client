@@ -6,7 +6,8 @@ const Slider = () => {
     return (
         <div className="carousel w-full mt-12">
             <div id="slide1" className="carousel-item relative w-full h-[100vh]">
-                <img src={slider1}  className="w-full" />
+                <div className='absolute bg-gradient-to-r from-green-100 to-green-800 opacity-30 w-full h-[100vh]'></div>
+                <img src={slider1}  className="w-full rounded" />
                 <div className='absolute flex flex-col items-center justify-center w-full h-[90vh]'>
                     <h2 className="text-xl md:text-3xl font-semibold w-3/4 text-center">Athletic Potential with Sports Academies</h2>
                     <p className='w-3/4 mt-4 text-center'>Welcome to Sports Academies, where passion meets excellence in sports education and training. Our comprehensive programs are designed to help individuals of all ages and skill levels unlock their athletic potential and excel in their chosen sport.</p>
@@ -18,7 +19,8 @@ const Slider = () => {
                 </div>
             </div>
             <div id="slide2" className="carousel-item relative w-full h-[100vh]">
-                <img src={slider2} className="w-full" />
+                <img src={slider2} className="w-full rounded" />
+                <div className='absolute bg-gradient-to-r from-green-100 to-green-200 opacity-30 w-full h-[100vh]'></div>
                 <div className='absolute flex flex-col items-center justify-center w-full h-[90vh]'>
                     <h2 className="text-xl md:text-3xl font-semibold w-3/4 text-center">Athletic Potential with Sports Academies</h2>
                     <p className='w-3/4 mt-4 text-center'>Welcome to Sports Academies, where passion meets excellence in sports education and training. Our comprehensive programs are designed to help individuals of all ages and skill levels unlock their athletic potential and excel in their chosen sport.</p>
@@ -30,7 +32,8 @@ const Slider = () => {
                 </div>
             </div>
             <div id="slide3" className="carousel-item relative w-full h-[100vh]">
-                <img src={slider3} className="w-full" />
+                <img src={slider3} className="w-full rounded"/>
+                <div className='absolute bg-gradient-to-r from-green-100 to-green-800 opacity-30 w-full h-[100vh]'></div>
                 <div className='absolute flex flex-col items-center justify-center w-full h-[90vh]'>
                     <h2 className="text-xl md:text-3xl font-semibold w-3/4 text-center">Athletic Potential with Sports Academies</h2>
                     <p className='w-3/4 mt-4 text-center'>Welcome to Sports Academies, where passion meets excellence in sports education and training. Our comprehensive programs are designed to help individuals of all ages and skill levels unlock their athletic potential and excel in their chosen sport.</p>

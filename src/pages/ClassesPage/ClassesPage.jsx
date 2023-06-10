@@ -72,20 +72,25 @@ const ClassesPage = () => {
     }
 
     return (
-        <div className="mt-20 max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4">
-            <h2 className="text-3xl text-center">All Classes {allClasses.length}</h2>
-            <div className="grid md:grid-cols-3 gap-6">
+        <div className="pt-24 pb-12 max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4">
+             <h2 className="text-2xl md:text-3xl font-semibold text-center">Approved Classes</h2>
+            <div className="flex items-center justify-center gap-2"> 
+                <div className="h-1 w-36 bg-[#4021a5]"></div>
+                <span className="text-red-500 font-semibold">Classes</span>
+                <div className="h-1 w-36 bg-[#4021a5]"></div>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6 mt-12">
                 {
                     allClasses &&
-                    allClasses.map(cls=> <div key={cls._id} className={`card w-96 glass ${cls?.seats == 0 ? "bg-red-500 text-white": ""}`}>
-                    <figure><img src={cls.image} alt="car!"/></figure>
+                    allClasses.map(cls=> <div key={cls._id} className={`w-full rounded glass ${cls?.seats == 0 ? "bg-red-500 text-white": ""}`}>
+                    <figure><img src={cls.image} className="w-full" alt="car!"/></figure>
                     <div className="card-body">
                       <p className="text-lg">Class: {cls.class_name}</p>
                       <p>Instructor: {cls.instructor_name} </p>
                       <p>Available Seats: {cls.seats} </p>
-                      <p>Price: {cls.price} </p>
+                      <p>Price: ${cls.price} </p>
                       <div className="card-actions">
-                        <button onClick={()=> handleSelect(cls)} className="btn btn-primary" disabled={ userRole?.role !== undefined || cls?.seats === 0}>Select</button>
+                        <button onClick={()=> handleSelect(cls)} className="btn-error btn" disabled={ userRole?.role !== undefined || cls?.seats === 0}>Select</button>
                       </div>
                     </div>
                   </div>)

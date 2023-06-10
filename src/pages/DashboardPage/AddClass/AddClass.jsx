@@ -32,9 +32,14 @@ const AddClass = () => {
     };
 
     return (
-        <div className='w-full'>
-            <h2 className="text-3xl">Add class by instructors</h2>
-            <form onSubmit={handleSubmit} className="p-12 bg-gray-200 me-12 rounded-lg">
+        <div className='w-full mt-12'>
+             <h2 className="text-2xl md:text-3xl font-semibold text-center">Add A Class</h2>
+            <div className="flex items-center justify-center gap-2">
+                <div className="h-1 w-36 bg-[#4021a5]"></div>
+                <span className="text-red-500 font-semibold">Add Class</span>
+                <div className="h-1 w-36 bg-[#4021a5]"></div>
+            </div>
+            <form onSubmit={handleSubmit} className="p-12 bg-gray-200 me-12 rounded-lg mt-8 ms-8 mb-12">
 
                 <div className="form-control w-full">
                     <label className="label">
