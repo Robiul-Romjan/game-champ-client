@@ -2,6 +2,7 @@ import { useState } from "react";
 import PopularClass from "../PopularClass/PopularClass";
 import Slider from "../Slider/Slider";
 import PopularInsTructors from "./PopularInstructors/PopularInsTructors";
+import Upcoming from "../Upcoming/Upcoming";
 
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
             <Slider />
             <PopularClass />
             <PopularInsTructors />
+            <Upcoming />
             <div className="fixed right-0 top-1/2 h-[100vh]">
                 <button className="btn btn-sm btn-error" onClick={toggleMode}>{toggle ? "Night" : "Day"}</button>
             </div>

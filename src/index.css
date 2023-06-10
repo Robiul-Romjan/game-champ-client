@@ -8,3 +8,24 @@
 h1,h2,h3,h4, h5, p,span, a{
     font-family: 'Poppins', sans-serif !important;
 }
+
+.btn-all{
+    background: #3c12c6;
+    border-radius: 25px;
+    padding: 8px 30px;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+}
+.btn-all:hover{
+    background: #3d03f9;
+    color: #fff;
+}
+
+.bg-color{
+    background: #3c12c6;
+}
+
+.nav-link.active{
+    color: #3d03f9;
+}

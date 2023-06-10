@@ -1,26 +1,27 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
+import { FaHome, FaShoppingCart, FaUtensils, FaBars, FaUser, FaBookmark, FaCheck} from "react-icons/fa";
 
 
 const Dashboard = () => {
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const [loading, setLoading] = useState(false);
-    const [userRole, setUserRole]= useState();
-    useEffect(()=> {
+    const [userRole, setUserRole] = useState();
+    useEffect(() => {
         setLoading(true)
         fetch("http://localhost:5000/users")
-        .then(res => res.json())
-        .then(data => {
-          const studentRole = data.find(student => student?.email === user?.email );
-          setUserRole(studentRole)
-          setLoading(false)
-        })
+            .then(res => res.json())
+            .then(data => {
+                const studentRole = data.find(student => student?.email === user?.email);
+                setUserRole(studentRole)
+                setLoading(false)
+            })
     }, [user?.email]);
 
     // const isAdmin = false;
     // const isInstructor = true;
-    if(loading){
+    if (loading) {
         return "Loading ............................"
     }
 
@@ -36,43 +37,51 @@ const Dashboard = () => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 h-full bg-base-200 text-base-content">
+                <ul className="p-4 w-80 h-full bg-gray-700 text-white">
                     {/* Sidebar content here */}
+                    <div className="mb-12 text-center">
+                        <img className="rounded-full w-20 h-20 mx-auto border-green-500 border-2" src={userRole?.image} alt="" />
+                        <p className="mt-2 text-gray-300">{userRole?.role}</p>
+                        <p className="mt-2 text-xl font-semibold">{userRole?.name}</p>
+                        <p className="mt-2">Email: {userRole?.email}</p>
+                    </div>
+                    <hr />
 
                     {
                         userRole?.role == "admin" ?
-                            <><li>
-                                <Link to="/dashboard/manage-users">Manage Users</Link>
-                            </li>
-                                <li>
-                                    <Link to="/dashboard/manage-classes">Manage Classes</Link>
+                            <div className="py-4">
+                                <li className="bg-gray-900 hover:bg-black rounded mb-4">
+                                    <NavLink className="nav-link flex items-center gap-2 justify-center" to="/dashboard/manage-users"><FaUser /> Manage Users</NavLink>
                                 </li>
-                            </> :
+                                <li className="bg-gray-900 hover:bg-black rounded">
+                                    <NavLink className="nav-link flex items-center gap-2 justify-center" to="/dashboard/manage-classes"><FaBars /> Manage Classes</NavLink>
+                                </li>
+                            </div> :
                             <>
                                 {
                                     userRole?.role == "instructor" ?
-                                        <>
-                                            <li>
-                                                <Link to="/dashboard/add-class">Add A Class</Link>
+                                        <div className="py-4">
+                                            <li className="bg-gray-900 hover:bg-black rounded mb-4">
+                                                <NavLink className="nav-link flex items-center gap-2 justify-center" to="/dashboard/add-class"><FaUtensils /> Add A Class</NavLink>
                                             </li>
-                                            <li>
-                                                <Link to="/dashboard/my-classes">My Class</Link>
+                                            <li className="bg-gray-900 hover:bg-black rounded">
+                                                <NavLink className="nav-link flex items-center gap-2 justify-center" to="/dashboard/my-classes"> <FaCheck /> My Class</NavLink>
                                             </li>
-                                        </> :
-                                        <>
-                                            <li>
-                                                <Link to="/dashboard/my-selected-classes">My Selected Classes</Link>
+                                        </div> :
+                                        <div className="py-4">
+                                            <li className="bg-gray-900 hover:bg-black rounded mb-4">
+                                                <NavLink className="nav-link flex items-center gap-2 justify-center" to="/dashboard/my-selected-classes"><FaShoppingCart /> My Selected Classes</NavLink>
                                             </li>
-                                            <li>
-                                                <Link to="/dashboard/my-enrolled-classes">My Enrolled Classes</Link>
+                                            <li className="bg-gray-900 hover:bg-black rounded">
+                                                <NavLink className="nav-link flex items-center gap-2 justify-center" to="/dashboard/my-enrolled-classes"><FaBookmark /> My Enrolled Classes</NavLink>
                                             </li>
-                                        </>
+                                        </div>
                                 }
                             </>
                     }
                     <hr />
-                    <li className="mt-20">
-                        <Link to="/">Home</Link>
+                    <li className="bg-gray-900 hover:bg-black rounded mt-12">
+                        <Link className="flex items-center gap-2 justify-center" to="/"><FaHome /> Home</Link>
                     </li>
                 </ul>
             </div>
