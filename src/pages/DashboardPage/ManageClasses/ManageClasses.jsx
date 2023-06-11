@@ -1,15 +1,12 @@
 /* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useEffect, useState } from "react";
-import FeedbackModal from "../../../components/FeedbackModal/FeedbackModal";
+import "./ManageClass.css"
 
 const ManageClasses = () => {
     const [allClasses, setAllClasses] = useState([]);
-    const [isOpen, setIsOpen] = useState(false);
 
-    const closeModal = () => {
-        setIsOpen(false)
-    };
+   
 
     useEffect(() => {
         axios.get("http://localhost:5000/classes")
@@ -37,8 +34,9 @@ const ManageClasses = () => {
     };
 
     const handleFeedback = (id) => {
-
+        
     }
+
 
     return (
         <div className="w-full ms-4 mt-12 mb-12">
@@ -64,12 +62,13 @@ const ManageClasses = () => {
                                 <button onClick={() => handleDeny(item._id)} className="btn btn-sm btn-error" disabled={item?.status == "approved" || item.status == "denied"}>Deny</button>
 
                                 <button onClick={() => handleFeedback(item._id)} className="btn btn-sm btn-secondary">Feedback</button>
-
                             </div>
+
                         </div>
                     </div>)
                 }
             </div>
+
         </div>
     );
 };

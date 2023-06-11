@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { FaTrashAlt, FaStripe } from "react-icons/fa";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 
 
 const MySelectedClasses = () => {
@@ -91,7 +92,8 @@ const MySelectedClasses = () => {
                                         <button onClick={() => handleDelete(item._id)} className="btn btn-circle btn-error text-white font-semibold btn-sm"><FaTrashAlt /></button>
                                     </td>
                                     <td>
-                                        <button className="btn btn-success text-white btn-sm"><FaStripe className="text-3xl" /></button>
+                                        <Link to="/dashboard/payment">
+                                            <button className="btn btn-success text-white btn-sm"><FaStripe className="text-3xl" />pay</button></Link>
                                     </td>
                                 </tr>)
                             }

@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivateRoute";
 import Instructors from "../pages/Instructors/Instructors";
 import ClassesPage from "../pages/ClassesPage/ClassesPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import Payment from "../pages/DashboardPage/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
@@ -70,6 +71,10 @@ export const router = createBrowserRouter([
         {
           path: "my-enrolled-classes",
           element: <MyEnrolledClasses />
+        },
+        {
+          path: "payment",
+          element: <Payment />
         },
       ]
     }
