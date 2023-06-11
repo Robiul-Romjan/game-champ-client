@@ -1,11 +1,31 @@
 import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
+import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../Providers/AuthProvider";
 
 // TODO
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK)
 
 const Payment = () => {
+    const {user}  = useContext(AuthContext)
+    const {id} = useParams();
+    const [classes, setClasses] = useState([]);
+
+    const url = `http://localhost:5000/select-classes?email=${user?.email}`;
+    
+    const item = classes.find(cls => cls._id === id);
+
+    const selectClass = classes.find(item=> item._id === id);
+
+    useEffect(() => {
+        fetch(url)
+            .then(res => res.json())
+            .then(data => setClasses(data))
+    }, [url, user?.email]);
+    
+
     return (
         <div className="w-full h-[100vh] flex items-center justify-center">
             <div>
@@ -17,7 +37,7 @@ const Payment = () => {
                 </div>
 
                 <Elements stripe={stripePromise}>
-                    <CheckoutForm />
+                    <CheckoutForm item={item} price={parseFloat(selectClass?.price)} />
                 </Elements>
 
             </div>

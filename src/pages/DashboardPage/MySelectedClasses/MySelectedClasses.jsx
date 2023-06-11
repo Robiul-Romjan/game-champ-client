@@ -74,6 +74,7 @@ const MySelectedClasses = () => {
                         </thead>
                         <tbody>
                             {
+                                classes ?
                                 classes.map((item, i) => <tr key={item._id}>
                                     <td className="font-semibold">{i + 1}</td>
                                     <td>
@@ -92,10 +93,10 @@ const MySelectedClasses = () => {
                                         <button onClick={() => handleDelete(item._id)} className="btn btn-circle btn-error text-white font-semibold btn-sm"><FaTrashAlt /></button>
                                     </td>
                                     <td>
-                                        <Link to="/dashboard/payment">
+                                        <Link to={`/dashboard/payment/${item._id}`}>
                                             <button className="btn btn-success text-white btn-sm"><FaStripe className="text-3xl" />pay</button></Link>
                                     </td>
-                                </tr>)
+                                </tr>) : <h2 className="text-3xl text-center text-black">No class</h2>
                             }
                         </tbody>
 
