@@ -61,45 +61,51 @@ const MySelectedClasses = () => {
                     <table className="table">
                         {/* head */}
                         <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Class Image</th>
-                                <th>Class Name</th>
-                                <th>Instructor</th>
-                                <th>Price</th>
-                                <th>Delete</th>
-                                <th>Payment</th>
-                                <th></th>
-                            </tr>
+                            {
+                                classes.length > 0 ?
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Class Image</th>
+                                        <th>Class Name</th>
+                                        <th>Instructor</th>
+                                        <th>Price</th>
+                                        <th>Delete</th>
+                                        <th>Payment</th>
+                                    </tr> : ""
+
+                            }
                         </thead>
                         <tbody>
                             {
-                                classes ?
-                                classes.map((item, i) => <tr key={item._id}>
-                                    <td className="font-semibold">{i + 1}</td>
-                                    <td>
-                                        <div className="flex items-center space-x-3">
-                                            <div className="avatar">
-                                                <div className="mask mask-squircle w-12 h-12">
-                                                    <img src={item.image} alt="Avatar Tailwind CSS Component" />
+                                classes.length > 0 ?
+                                    classes.map((item, i) => <tr key={item._id}>
+                                        <td className="font-semibold">{i + 1}</td>
+                                        <td>
+                                            <div className="flex items-center space-x-3">
+                                                <div className="avatar">
+                                                    <div className="mask mask-squircle w-12 h-12">
+                                                        <img src={item.image} alt="Avatar Tailwind CSS Component" />
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>{item.class_name}</td>
-                                    <td>{item.instructor}</td>
-                                    <td>$ {item.price}</td>
-                                    <td>
-                                        <button onClick={() => handleDelete(item._id)} className="btn btn-circle btn-error text-white font-semibold btn-sm"><FaTrashAlt /></button>
-                                    </td>
-                                    <td>
-                                        <Link to={`/dashboard/payment/${item._id}`}>
-                                            <button className="btn btn-success text-white btn-sm"><FaStripe className="text-3xl" />pay</button></Link>
-                                    </td>
-                                </tr>) : <h2 className="text-3xl text-center text-black">No class</h2>
+                                        </td>
+                                        <td>{item.class_name}</td>
+                                        <td>{item.instructor}</td>
+                                        <td>$ {item.price}</td>
+                                        <td>
+                                            <button onClick={() => handleDelete(item._id)} className="btn btn-circle btn-error text-white font-semibold btn-sm"><FaTrashAlt /></button>
+                                        </td>
+                                        <td>
+                                            <Link to={`/dashboard/payment/${item._id}`}>
+                                                <button className="btn btn-success text-white btn-sm"><FaStripe className="text-3xl" />pay</button></Link>
+                                        </td>
+                                    </tr>) :
+                                    <div className="text-center mt-12 me-10">
+                                        <h2 className="text-2xl font-bold">You have no selected classes</h2>
+                                        <p className="font-light text-neutral-500 mt-2">Please select classes first.</p>
+                                    </div>
                             }
                         </tbody>
-
 
                     </table>
                 </div>

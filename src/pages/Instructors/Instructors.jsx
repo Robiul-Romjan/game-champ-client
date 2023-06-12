@@ -1,16 +1,27 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Loader from "../../components/Shared/Loader/Loader";
 
 const Instructors = () => {
     const [instructor, setInstructor] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(()=>{
+        setLoading(true)
         axios.get("http://localhost:5000/users")
         .then(data => {
           const insUser = data.data.filter(user => user.role === "instructor");
           setInstructor(insUser);
+          setLoading(false)
         })
-    },[])
+        
+    },[]);
+
+    if(loading){
+        return <Loader />
+    }
+
+
     return (
         <div className="pt-24 pb-12 className='max-w-[2520px] mx-auto xl:px-20 md:px-10 sm:px-2 px-4'">
             <h2 className="text-2xl md:text-3xl font-semibold text-center">All Instructors</h2>

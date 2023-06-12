@@ -1,8 +1,10 @@
 import { useQuery } from "@tanstack/react-query"
+import Loader from "../../../components/Shared/Loader/Loader";
+import Swal from "sweetalert2";
 
 const ManageUsers = () => {
 
-    const { data: users = [], refetch } = useQuery(["users"], async () => {
+    const { data: users = [], refetch, isLoading } = useQuery(["users"], async () => {
         const res = await fetch("http://localhost:5000/users")
         return res.json();
     });
@@ -15,7 +17,13 @@ const ManageUsers = () => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                     refetch()
-                    alert("user now admin")
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'Now this user is admin',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
                 }
             })
     };
@@ -28,7 +36,13 @@ const ManageUsers = () => {
             .then(data => {
                 if (data.modifiedCount > 0) {
                     refetch()
-                    alert("user now Instructor")
+                    Swal.fire({
+                        position: 'top-center',
+                        icon: 'success',
+                        title: 'This user is now instructor',
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
                 }
             })
     };
@@ -41,35 +55,41 @@ const ManageUsers = () => {
                 <span className="text-red-500 font-semibold">Manage Users</span>
                 <div className="h-1 w-36 bg-[#4021a5]"></div>
             </div>
-            <div className="overflow-x-auto mt-8">
-                <table className="table">
-                    {/* head */}
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                            <th>Action 1</th>
-                            <th>Action 2</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            users.map((user, i) => <tr key={user._id}>
-                                <th>{i + 1}</th>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
-                                <td>
-                                    <button onClick={() => handleMakeInstructor(user._id)} className="btn btn-sm btn-info" disabled={user.role == "instructor"}>Make Instructor</button>
-                                </td>
-                                <td>
-                                    <button onClick={() => handleMakeAdmin(user._id)} className="btn btn-sm btn-error" disabled={user.role == "admin"} >Make Admin</button>
-                                </td>
-                            </tr>)
-                        }
-                    </tbody>
-                </table>
-            </div>
+
+            {
+                isLoading ? <Loader /> :
+                    <div className="overflow-x-auto mt-8">
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Action 1</th>
+                                    <th>Action 2</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    users.map((user, i) => <tr key={user._id}>
+                                        <th>{i + 1}</th>
+                                        <td>{user.name}</td>
+                                        <td>{user.email}</td>
+                                        <td>
+                                            <button onClick={() => handleMakeInstructor(user._id)} className="btn btn-sm btn-info" disabled={user.role == "instructor"}>Make Instructor</button>
+                                        </td>
+                                        <td>
+                                            <button onClick={() => handleMakeAdmin(user._id)} className="btn btn-sm btn-error" disabled={user.role == "admin"} >Make Admin</button>
+                                        </td>
+                                    </tr>)
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+            }
+
+
         </div>
     );
 };

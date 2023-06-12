@@ -2,6 +2,7 @@
 import { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
+import Loader from "../components/Shared/Loader/Loader";
 
 
 // eslint-disable-next-line react/prop-types
@@ -10,9 +11,7 @@ const PrivateRoute = ({children}) => {
     const location = useLocation()
 
     if(loading){
-        return <div className="mt-24">
-            <progress className="progress w-56"></progress>
-        </div>
+        return <Loader />
     }
 
     if(user){

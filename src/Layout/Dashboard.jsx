@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../Providers/AuthProvider";
 import { FaHome, FaShoppingCart, FaUtensils, FaBars, FaUser, FaBookmark, FaCheck} from "react-icons/fa";
+import Loader from "../components/Shared/Loader/Loader";
 
 
 const Dashboard = () => {
@@ -22,7 +23,7 @@ const Dashboard = () => {
     // const isAdmin = false;
     // const isInstructor = true;
     if (loading) {
-        return "Loading ............................"
+        return <Loader />
     }
 
 

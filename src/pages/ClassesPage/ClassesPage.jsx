@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import Swal from 'sweetalert2'
 import { AuthContext } from "../../Providers/AuthProvider";
 import { useLocation, useNavigate } from "react-router-dom";
+import Loader from "../../components/Shared/Loader/Loader";
 
 const ClassesPage = () => {
     const {user} = useContext(AuthContext)
@@ -35,7 +36,7 @@ const ClassesPage = () => {
     }, [user?.email]);
 
     if(loading){
-        return "Loading"
+        return <Loader />
     }
 
     const handleSelect =(item)=> {

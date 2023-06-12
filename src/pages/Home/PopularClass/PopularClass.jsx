@@ -1,16 +1,14 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 
 const PopularClass = () => {
-    const [popularClasses, setPopularClasses] = useState([]);
 
-    useEffect(() => {
-        fetch("http://localhost:5000/popular-classes")
-            .then(res => res.json())
-            .then(data => {
-                setPopularClasses(data)
-            })
-    }, [])
+    const { data: popularClasses = [] } = useQuery(["popular-classes"], async () => {
+        const res = await fetch("http://localhost:5000/popular-classes")
+        return res.json();
+    });
+
+
     return (
         <div className="mt-20 md:mt-24">
             <h2 className="text-2xl md:text-3xl font-semibold text-center">Our Popular Classes</h2>

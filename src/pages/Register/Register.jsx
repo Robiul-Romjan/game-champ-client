@@ -22,8 +22,8 @@ const Register = () => {
     const onSubmit = data => {
         // console.log(data)
         setErr(false)
-        if(password !== confirmPassword){
-          return setErr("Password did not match")
+        if (password !== confirmPassword) {
+            return setErr("Password did not match")
         }
         createUser(data.email, data.password)
             .then(result => {
@@ -62,9 +62,9 @@ const Register = () => {
 
 
     return (
-        <div className="hero min-h-screen bg-base-200 text-black">
+        <div className="hero min-h-screen bg-base-200 text-black pb-8">
 
-            <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mt-24">
+            <div className="card flex-shrink-0 w-1/2 shadow-2xl bg-base-100 mt-24">
                 <h2 className="text-3xl text-center mt-5 font-semibold">Register Now</h2>
                 <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                     <div className="form-control">
@@ -81,38 +81,42 @@ const Register = () => {
                         <input  {...register("email", { required: true })} type="email" placeholder="type email" className="input input-bordered" />
                         {errors.email && <span className="text-red-400 text-sm">Email is required</span>}
                     </div>
-                    <div className="form-control relative">
-                        <label className="label">
-                            <span className="label-text">Password</span>
-                        </label>
-                        <input
-                            {...register("password", { required: true, minLength: 6, pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/ })}
-                            type={`${show ? "password" : "text"}`}
-                            placeholder="type password"
-                            className="input input-bordered"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        {errors.password?.type === 'required' && <p className="text-red-400 text-sm">Password is required</p>}
-                        {errors.password?.type === 'minLength' && <p className="text-red-400 text-sm">Password must be 6 characters</p>}
-                        {errors.password?.type === 'pattern' && <p className="text-red-400 text-sm">Password must have one Uppercase one lower case, one number and one special character.</p>}
-                        <span onClick={() => setShow(!show)} className="cursor-pointer absolute right-0 top-1/2 mt-2 me-4"><FaEye /></span>
+
+                    <div className="flex gap-4">
+                        <div className="form-control relative w-full">
+                            <label className="label">
+                                <span className="label-text">Password</span>
+                            </label>
+                            <input
+                                {...register("password", { required: true, minLength: 6, pattern: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z])/ })}
+                                type={`${show ? "password" : "text"}`}
+                                placeholder="type password"
+                                className="input input-bordered"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                            />
+                            {errors.password?.type === 'required' && <p className="text-red-400 text-sm">Password is required</p>}
+                            {errors.password?.type === 'minLength' && <p className="text-red-400 text-sm">Password must be 6 characters</p>}
+                            {errors.password?.type === 'pattern' && <p className="text-red-400 text-sm">Password must have one Uppercase one lower case, one number and one special character.</p>}
+                            <span onClick={() => setShow(!show)} className="cursor-pointer absolute right-0 top-1/2 mt-2 me-4"><FaEye /></span>
+                        </div>
+                        <div className="form-control relative w-full">
+                            <label className="label">
+                                <span className="label-text">Confirm Password</span>
+                            </label>
+                            <input
+                                {...register("confirm_password", { required: true, minLength: 6, maxLength: 20 })}
+                                type={`${showConfirm ? "password" : "text"}`}
+                                placeholder="type confirm password"
+                                className="input input-bordered"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                            />
+                            {errors.confirm_password && <span className="text-red-400 text-sm">Confirm password is required</span>}
+                            <span onClick={() => setShowConfirm(!showConfirm)} className="cursor-pointer absolute right-0 top-1/2 mt-2 me-4"><FaEye /></span>
+                        </div>
                     </div>
-                    <div className="form-control relative">
-                        <label className="label">
-                            <span className="label-text">Confirm Password</span>
-                        </label>
-                        <input
-                            {...register("confirm_password", { required: true, minLength: 6, maxLength: 20 })}
-                            type={`${showConfirm ? "password" : "text"}`}
-                            placeholder="type confirm password"
-                            className="input input-bordered"
-                            value={confirmPassword}
-                            onChange={(e) => setConfirmPassword(e.target.value)}
-                        />
-                        {errors.confirm_password && <span className="text-red-400 text-sm">Confirm password is required</span>}
-                        <span onClick={() => setShowConfirm(!showConfirm)} className="cursor-pointer absolute right-0 top-1/2 mt-2 me-4"><FaEye /></span>
-                    </div>
+
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Photo URL</span>

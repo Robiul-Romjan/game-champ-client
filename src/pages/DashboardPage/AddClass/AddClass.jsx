@@ -1,8 +1,10 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../../Providers/AuthProvider';
+import Swal from 'sweetalert2';
 
 const AddClass = () => {
     const { user } = useContext(AuthContext);
+    
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -14,8 +16,8 @@ const AddClass = () => {
         const seats = form.seats.value;
         const price = form.price.value;
 
-        const newClass = {class_name, image, instructor_name, email, seats: parseFloat(seats), status: "pending", price: parseFloat(price), enrolled: parseFloat(0), feedback: ""}
-
+        const newClass = { class_name, image, instructor_name, email, seats: parseFloat(seats), status: "pending", price: parseFloat(price), enrolled: parseFloat(0), feedback: "" }
+    
         fetch("http://localhost:5000/classes", {
             method: "POST",
             headers: {
@@ -23,17 +25,24 @@ const AddClass = () => {
             },
             body: JSON.stringify(newClass)
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.insertedId){
-                alert("successfully added class")
-            }
-        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    Swal.fire({
+                        title: 'Success!',
+                        text: 'You have successfully added class',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+            })
+            form.reset();
     };
+
 
     return (
         <div className='w-full mt-12'>
-             <h2 className="text-2xl md:text-3xl font-semibold text-center">Add A Class</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-center">Add A Class</h2>
             <div className="flex items-center justify-center gap-2">
                 <div className="h-1 w-36 bg-[#4021a5]"></div>
                 <span className="text-red-500 font-semibold">Add Class</span>

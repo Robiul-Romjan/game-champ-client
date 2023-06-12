@@ -33,7 +33,7 @@ const SocialSignIn = () => {
 
     return (
         <div>
-            <button onClick={handleGoogleLogin} className="btn btn-success w-full"><FaGoogle /> Sign up with Google</button>
+            <button onClick={handleGoogleLogin} className="btn btn-success text-white w-full"><FaGoogle /> Sign up with Google</button>
         </div>
     );
 };
