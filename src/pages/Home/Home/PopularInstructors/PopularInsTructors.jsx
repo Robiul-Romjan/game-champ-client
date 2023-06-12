@@ -6,7 +6,7 @@ const PopularInsTructors = () => {
     const {user} = useContext(AuthContext);
     const [instructors, setInstructors]= useState([]);
     useEffect(()=> {
-        fetch("http://localhost:5000/users")
+        fetch("https://assignment-12-server-ivory.vercel.app/users")
         .then(res => res.json())
         .then(data => {
           const studentRole = data.filter(student => student?.role === "instructor" );

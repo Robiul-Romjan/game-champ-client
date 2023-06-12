@@ -12,7 +12,7 @@ const Login = () => {
     const [err, setErr] = useState("")
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { signIn } = useContext(AuthContext);
- 
+
     const navigate = useNavigate();
     const location = useLocation()
     const from = location.state?.from?.pathname || "/"
@@ -29,7 +29,7 @@ const Login = () => {
                     title: 'You have successfully login',
                     showConfirmButton: false,
                     timer: 1500
-                  })
+                })
                 navigate(from, { replace: true }) || "/"
             })
             .catch(error => {
@@ -58,11 +58,11 @@ const Login = () => {
                         {errors.password?.type === 'required' && <p className="text-red-400 text-sm">Password is required</p>}
                         {errors.password?.type === 'minLength' && <p className="text-red-400 text-sm">Password must be 6 characters</p>}
                         {errors.password?.type === 'pattern' && <p className="text-red-400 text-sm">Password must have one Uppercase one lower case, one number and one special character.</p>}
-                        
-                        <span onClick={()=>setShow(!show)} className="cursor-pointer absolute right-0 top-1/2 mt-2 me-4"><FaEye /></span>
+
+                        <span onClick={() => setShow(!show)} className="cursor-pointer absolute right-0 top-1/2 mt-2 me-4"><FaEye /></span>
                     </div>
                     <p className="mt-2 ms-2 text-red-500">{err}</p>
-                    
+
                     <div className="form-control mt-6">
                         <input className="btn btn-primary" type="submit" value="Login" />
                     </div>

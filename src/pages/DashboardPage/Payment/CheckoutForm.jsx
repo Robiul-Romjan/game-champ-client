@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { FaInstalod, FaOsi, FaTruckLoading } from "react-icons/fa";
 
-const url = "http://localhost:5000/create-payment-intent";
+const url = "https://assignment-12-server-ivory.vercel.app/create-payment-intent";
 
 
 const CheckoutForm = ({ price, item }) => {
@@ -100,10 +100,10 @@ const CheckoutForm = ({ price, item }) => {
             const payment = { email: user?.email, transactionId: paymentIntent.id, price, class: item?.class_name, image: item?.image, instructor: item?.instructor, classId: item?._id, date: new Date() };
             // console.log(payment)
             setLoading(true)
-            axios.post("http://localhost:5000/payments", payment)
+            axios.post("https://assignment-12-server-ivory.vercel.app/payments", payment)
                 .then(res => {
                     if(res.data.insertedId){
-                        axios.delete(`http://localhost:5000/select-classes/${item._id}`)
+                        axios.delete(`https://assignment-12-server-ivory.vercel.app/select-classes/${item._id}`)
                         .then(res => {
                             if(res.data.deletedCount > 0){
                                 setLoading(false);

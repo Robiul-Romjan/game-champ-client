@@ -9,7 +9,7 @@ const MyEnrolledClasses = () => {
     const [enrolled, setEnrolled] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const url = `http://localhost:5000/payments?email=${user?.email}`
+    const url = `https://assignment-12-server-ivory.vercel.app/payments?email=${user?.email}`
 
     useEffect(() => {
         setLoading(true)

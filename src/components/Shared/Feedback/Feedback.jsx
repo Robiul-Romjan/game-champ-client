@@ -8,7 +8,7 @@ const Feedback = () => {
     const [feedbackClass, setFeedbackClass] = useState()
 
     useEffect(()=> {
-        axios.get("http://localhost:5000/classes")
+        axios.get("https://assignment-12-server-ivory.vercel.app/classes")
         .then(res => {
             const feedbackClass = res.data.find(fd => fd._id === id);
             setFeedbackClass(feedbackClass)
@@ -20,7 +20,7 @@ const Feedback = () => {
         const form = e.target;
         const feedback = form.feedback.value;
         // console.log(feedback)
-        fetch(`http://localhost:5000/classes/denied/${feedbackClass?._id}`, {
+        fetch(`https://assignment-12-server-ivory.vercel.app/${feedbackClass?._id}`, {
             method: "PATCH",
             headers: {
                 "content-type": "application/json"

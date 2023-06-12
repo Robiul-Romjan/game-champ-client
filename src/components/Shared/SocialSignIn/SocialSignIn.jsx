@@ -15,7 +15,7 @@ const SocialSignIn = () => {
             .then(result => {
                 const savedUser = { name: result.user.displayName, email: result.user.email, image: result.user.photoURL }
                 
-                fetch("http://localhost:5000/users", {
+                fetch("https://assignment-12-server-ivory.vercel.app/users", {
                     method: "POST",
                     headers: {
                         "content-type": "application/json"

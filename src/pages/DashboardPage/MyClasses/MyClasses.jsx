@@ -10,7 +10,7 @@ const MyClasses = () => {
     const [classes, setClasses] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const url = `http://localhost:5000/instructorClasses?email=${user?.email}`
+    const url = `https://assignment-12-server-ivory.vercel.app/instructorClasses?email=${user?.email}`
 
     useEffect(() => {
         setLoading(true)

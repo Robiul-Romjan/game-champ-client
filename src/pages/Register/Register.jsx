@@ -32,7 +32,7 @@ const Register = () => {
                 updateUserProfile(data.name, data.photo)
                     .then(() => {
                         const savedUser = { name: data.name, email: data.email, image: data.photo };
-                        fetch("http://localhost:5000/users", {
+                        fetch("https://assignment-12-server-ivory.vercel.app/users", {
                             method: "POST",
                             headers: {
                                 "content-type": "application/json"

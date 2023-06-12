@@ -11,7 +11,7 @@ const MySelectedClasses = () => {
     const [classes, setClasses] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const url = `http://localhost:5000/select-classes?email=${user?.email}`
+    const url = `https://assignment-12-server-ivory.vercel.app/select-classes?email=${user?.email}`
 
     useEffect(() => {
         setLoading(true)
@@ -35,7 +35,7 @@ const MySelectedClasses = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                fetch(`http://localhost:5000/select-classes/${id}`, {
+                fetch(`https://assignment-12-server-ivory.vercel.app/select-classes/${id}`, {
                     method: "DELETE"
                 })
                     .then(res => res.json())

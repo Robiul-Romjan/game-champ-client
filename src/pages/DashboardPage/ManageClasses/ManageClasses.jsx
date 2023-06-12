@@ -12,7 +12,7 @@ const ManageClasses = () => {
 
     useEffect(() => {
         setLoading(true);
-        axios.get("http://localhost:5000/classes")
+        axios.get("https://assignment-12-server-ivory.vercel.app/classes")
             .then(data => {
                 setAllClasses(data.data);
                 setLoading(false);
@@ -20,7 +20,7 @@ const ManageClasses = () => {
     }, []);
 
     const handleApprove = (id) => {
-        axios.patch(`http://localhost:5000/classes/approve/${id}`)
+        axios.patch(`https://assignment-12-server-ivory.vercel.app/classes/approve/${id}`)
             .then(data => {
                 const updatedClasses = allClasses.map((item) =>
                     item._id === id ? { ...item, status: "approved" } : item
@@ -37,7 +37,7 @@ const ManageClasses = () => {
     };
 
     const handleDeny = (id) => {
-        axios.patch(`http://localhost:5000/classes/deny/${id}`)
+        axios.patch(`https://assignment-12-server-ivory.vercel.app/classes/deny/${id}`)
             .then(data => {
                 const updatedClasses = allClasses.map((item) =>
                     item._id === id ? { ...item, status: "denied" } : item

@@ -18,7 +18,7 @@ const AddClass = () => {
 
         const newClass = { class_name, image, instructor_name, email, seats: parseFloat(seats), status: "pending", price: parseFloat(price), enrolled: parseFloat(0), feedback: "" }
     
-        fetch("http://localhost:5000/classes", {
+        fetch("https://assignment-12-server-ivory.vercel.app/classes", {
             method: "POST",
             headers: {
                 "content-type": "application/json"

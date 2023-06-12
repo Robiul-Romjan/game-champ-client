@@ -8,7 +8,7 @@ const Instructors = () => {
 
     useEffect(()=>{
         setLoading(true)
-        axios.get("http://localhost:5000/users")
+        axios.get("https://assignment-12-server-ivory.vercel.app/users")
         .then(data => {
           const insUser = data.data.filter(user => user.role === "instructor");
           setInstructor(insUser);

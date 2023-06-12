@@ -16,7 +16,7 @@ const ClassesPage = () => {
     const location = useLocation();
 
     useEffect(() => {
-        axios.get("http://localhost:5000/classes")
+        axios.get("https://assignment-12-server-ivory.vercel.app/classes")
             .then(data => {
                 // console.log(data.data)
                 const approvedClasses = data.data.filter(item => item.status === "approved");
@@ -26,7 +26,7 @@ const ClassesPage = () => {
 
     useEffect(()=> {
         setLoading(true)
-        fetch("http://localhost:5000/users")
+        fetch("https://assignment-12-server-ivory.vercel.app/users")
         .then(res => res.json())
         .then(data => {
           const studentRole = data.find(student => student?.email === user?.email );
@@ -43,7 +43,7 @@ const ClassesPage = () => {
         if (user && user.email) {
             const selectedClass = {classId: item._id, class_name: item.class_name, image: item.image, price: item.price, email: user.email, instructor: item.instructor_name};
             console.log(selectedClass);
-            fetch("http://localhost:5000/select-classes", {
+            fetch("https://assignment-12-server-ivory.vercel.app/select-classes", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"

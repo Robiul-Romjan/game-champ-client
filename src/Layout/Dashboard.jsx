@@ -11,7 +11,7 @@ const Dashboard = () => {
     const [userRole, setUserRole] = useState();
     useEffect(() => {
         setLoading(true)
-        fetch("http://localhost:5000/users")
+        fetch("https://assignment-12-server-ivory.vercel.app/users")
             .then(res => res.json())
             .then(data => {
                 const studentRole = data.find(student => student?.email === user?.email);

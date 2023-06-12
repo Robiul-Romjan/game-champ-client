@@ -13,7 +13,7 @@ const Payment = () => {
     const {id} = useParams();
     const [classes, setClasses] = useState([]);
 
-    const url = `http://localhost:5000/select-classes?email=${user?.email}`;
+    const url = `https://assignment-12-server-ivory.vercel.app/select-classes?email=${user?.email}`;
     
     const item = classes.find(cls => cls._id === id);
 
