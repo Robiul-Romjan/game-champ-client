@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import Loader from "../../../components/Shared/Loader/Loader";
+import { Link } from "react-router-dom";
 
 
 
@@ -72,7 +73,9 @@ const MyClasses = () => {
                                                     <button className="btn btn-xs btn-success">Update</button>
                                                 </td>
                                                 <td>
-                                                    <button className="btn btn-xs btn-error">Feedback</button>
+                                                    <Link className="btn btn-xs btn-error" to={`/dashboard/feedback/${item._id}`}>
+                                                        <button >Feedback</button>
+                                                    </Link>
                                                 </td>
                                                 <td>{item?.feedback ? item.feedback : "No feedback"}</td>
                                             </tr>) :

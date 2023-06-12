@@ -1,3 +1,4 @@
+import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import logo from "../../../assets/logo.png"
 
 const Footer = () => {
@@ -18,10 +19,14 @@ const Footer = () => {
                 </div>
                 <div>
                     <span className="footer-title">Contact</span>
-                    <a className="link link-hover">About us</a>
-                    <a className="link link-hover">Contact</a>
-                    <a className="link link-hover">Summer Sports Camps</a>
-                    <a className="link link-hover">Press kit</a>
+                    <a className="link link-hover">Email: gamecamp@gmail.com</a>
+                    <a className="link link-hover">Phone: +98456654655</a>
+                    <a className="link link-hover">Social Contact:</a>
+                    <div className="flex items-center gap-4">
+                        <span className="text-xl cursor-pointer"><FaFacebook /></span>
+                        <span className="text-xl cursor-pointer"><FaInstagram /></span>
+                        <span className="text-xl cursor-pointer"><FaTwitter /></span>
+                    </div>
                 </div>
                 <div>
                     <span className="footer-title">Address</span>

@@ -24,7 +24,7 @@ const PopularInsTructors = () => {
             </div>
             <div className="grid md:grid-cols-3 gap-6 mt-12">
                 {
-                    instructors.slice(0, 6).map((instructor)=> <div className="mx-auto shadow-lg p-4 w-full rounded border-[#4021a5] border-x-2" key={instructor._id}>
+                    instructors.slice(0, 6).map((instructor)=> <div className="mx-auto shadow-lg p-4 w-full rounded border-[#4021a5] border-x-2" key={instructor._id} data-aos="zoom-in-down" data-aos-duration="1000">
                         <img className="w-36 h-36 rounded-full mx-auto border-2 border-[#4021a5]" src={instructor.image} alt="" />
                         <div className="text-center mt-5">
                             <p className="text-xl font-bold">{instructor?.name}</p>

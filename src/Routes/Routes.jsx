@@ -15,6 +15,7 @@ import Instructors from "../pages/Instructors/Instructors";
 import ClassesPage from "../pages/ClassesPage/ClassesPage";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Payment from "../pages/DashboardPage/Payment/Payment";
+import Feedback from "../components/Shared/Feedback/Feedback";
 
 export const router = createBrowserRouter([
     {
@@ -75,6 +76,10 @@ export const router = createBrowserRouter([
         {
           path: "payment/:id",
           element: <Payment />
+        },
+        {
+          path: "feedback/:id",
+          element: <Feedback />
         },
       ]
     }

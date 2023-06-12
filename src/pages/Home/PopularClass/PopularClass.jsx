@@ -8,7 +8,6 @@ const PopularClass = () => {
         return res.json();
     });
 
-
     return (
         <div className="mt-20 md:mt-24">
             <h2 className="text-2xl md:text-3xl font-semibold text-center">Our Popular Classes</h2>
@@ -20,7 +19,7 @@ const PopularClass = () => {
             
             <div className="grid md:grid-cols-3 gap-6 mt-8">
                 {
-                    popularClasses.map((popular) => <div className="shadow-lg p-4 rounded border-[#4021a5] border-y-2" key={popular._id}>
+                    popularClasses.map((popular) => <div className="shadow-lg p-4 rounded border-[#4021a5] border-y-2" key={popular._id} data-aos="flip-up"  data-aos-duration="1000">
                         <img className="rounded" src={popular.image} alt="" />
                         <div className="mt-4">
                             <h4 className="text-xl font-semibold">{popular.class_name}</h4>

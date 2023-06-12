@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import { useContext, useEffect, useState } from "react";
@@ -6,6 +7,7 @@ import axios from "axios";
 import "./CheckoutForm.css"
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { FaInstalod, FaOsi, FaTruckLoading } from "react-icons/fa";
 
 const url = "http://localhost:5000/create-payment-intent";
 
@@ -19,6 +21,7 @@ const CheckoutForm = ({ price, item }) => {
     const [clientSecret, setClientSecret] = useState("")
     const [processing, setProcessing] = useState(false);
     const [transId, setTransId] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -96,12 +99,14 @@ const CheckoutForm = ({ price, item }) => {
             // eslint-disable-next-line react/prop-types
             const payment = { email: user?.email, transactionId: paymentIntent.id, price, class: item?.class_name, image: item?.image, instructor: item?.instructor, classId: item?._id, date: new Date() };
             // console.log(payment)
+            setLoading(true)
             axios.post("http://localhost:5000/payments", payment)
                 .then(res => {
                     if(res.data.insertedId){
                         axios.delete(`http://localhost:5000/select-classes/${item._id}`)
                         .then(res => {
                             if(res.data.deletedCount > 0){
+                                setLoading(false);
                                 Swal.fire({
                                     title: 'success!',
                                     text: 'You have successfully payment',
@@ -138,12 +143,16 @@ const CheckoutForm = ({ price, item }) => {
                 />
 
                 <div className="text-center">
+                    <div className="mb-2">
+                        {
+                            loading ? <p className="flex items-center justify-center gap-2">Processing: <FaOsi className="animate-spin" /></p> : ""
+                        }
+                    </div>
                     <button className="btn-all" type="submit" disabled={!stripe || !clientSecret || processing}>
                         Pay
                     </button>
                 </div>
                 {cardError && <p className="mt-4 text-red-500">Error: {cardError}</p>}
-                {transId && <p className="mt-6">Your transaction Id: <span className="text-green-500">{transId}</span></p>}
             </form>
         </div>
     );
