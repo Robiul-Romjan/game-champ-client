@@ -2,7 +2,7 @@
 Here is full stack Game Champ app and have some features includes my projects
 
 ## 🔗 Project live link
-https://for-assignment-11.web.app/
+https://for-assignment-12.web.app/
 
 ## Top 5 bullet point of my project.
 ### 1.Implement mongodb CRUD operation
